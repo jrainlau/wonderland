@@ -1,0 +1,22 @@
+{
+  "name": "wonderland",
+  "version": "1.0.1",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build:mac": "electron-builder build --mac",
+    "build:win": "electron-builder build --win",
+    "serve": "npx http-server ./dist --port=8081"
+  },
+  "repository": "https://github.com/jrainlau/wonderland.git",
+  "author": "jrainliu <jrainliu@tencent.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^19.0.6",
+    "electron-builder": "^23.1.0"
+  },
+  "dependencies": {
+    "electron-log": "^4.4.8",
+    "electron-updater": "^5.0.5"
+  }
+}
