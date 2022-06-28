@@ -51,17 +51,22 @@
     const notification = document.getElementById('notification');
     const message = document.getElementById('message');
     const restartButton = document.getElementById('restart-button');
-    ipcRenderer.on('update_available', () => {
-      ipcRenderer.removeAllListeners('update_available');
+    ipcRenderer.on('update_available', (event, arg) => {
+      // ipcRenderer.removeAllListeners('update_available');
+      console.log('update_available', arg)
       message.innerText = 'A new update is available. Downloading now...';
       notification.classList.remove('hidden');
     });
-    ipcRenderer.on('update_downloaded', () => {
-      ipcRenderer.removeAllListeners('update_downloaded');
+    ipcRenderer.on('update_downloaded', (event, arg) => {
+      // ipcRenderer.removeAllListeners('update_downloaded');
+      console.log('update_downloaded', arg)
       message.innerText = 'Update Downloaded. It will be installed on restart. Restart now?';
       restartButton.classList.remove('hidden');
       notification.classList.remove('hidden');
     });
+    ipcRenderer.on('log_from_main', (event, arg) => {
+      console.log('Msg from main process:', arg)
+    })
 
     function closeNotification() {
       notification.classList.add('hidden');

@@ -4,7 +4,8 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "build:mac": "electron-builder build --mac",
+    "build:mac": "node ./scripts/setVersion.js && electron-builder build --mac",
+    "build:mac:base": "VERSION=1.0.0 node ./scripts/setVersion.js && electron-builder build --mac && mv ./dist ./1.0.0",
     "build:win": "electron-builder build --win",
     "serve": "npx http-server ./dist --port=8081"
   },

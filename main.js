@@ -9,6 +9,8 @@ const logToWin = (...args) => {
 
 autoUpdater.logger = log;
 autoUpdater.logger.transports.file.level = 'info';
+autoUpdater.allowDowngrade = true
+autoUpdater.allowPrerelease = true
 autoUpdater.setFeedURL('http://localhost:8081')
 
 let mainWindow;
@@ -48,8 +50,11 @@ app.on('activate', function () {
   }
 });
 
-ipcMain.on('check_update', () => {
-  autoUpdater.checkForUpdatesAndNotify();
+ipcMain.on('check_update', async () => {
+  const updateInfo = await autoUpdater.checkForUpdates();
+  log.info('updateInfo: ', updateInfo)
+
+  logToWin(updateInfo)
 })
 ipcMain.on('app_version', (event) => {
   event.sender.send('app_version', { version: app.getVersion() });
@@ -58,9 +63,9 @@ ipcMain.on('restart_app', () => {
   autoUpdater.quitAndInstall();
 });
 
-autoUpdater.on('update-available', () => {
-  mainWindow.webContents.send('update_available');
+autoUpdater.on('update-available', (info) => {
+  mainWindow.webContents.send('update_available', info);
 });
-autoUpdater.on('update-downloaded', () => {
-  mainWindow.webContents.send('update_downloaded');
+autoUpdater.on('update-downloaded', (info) => {
+  mainWindow.webContents.send('update_downloaded', info);
 });
