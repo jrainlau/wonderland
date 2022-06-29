@@ -11,7 +11,6 @@ autoUpdater.logger = log;
 autoUpdater.logger.transports.file.level = 'info';
 autoUpdater.allowDowngrade = true
 autoUpdater.allowPrerelease = true
-autoUpdater.setFeedURL('http://localhost:8081')
 
 let mainWindow;
 
@@ -50,11 +49,12 @@ app.on('activate', function () {
   }
 });
 
-ipcMain.on('check_update', async () => {
+ipcMain.on('check_update', async (event, version = '1.0.0') => {
+  log.info('Querying version:', version)
+  autoUpdater.setFeedURL(`http://localhost:8081/${version}`)
+
   const updateInfo = await autoUpdater.checkForUpdates();
   log.info('updateInfo: ', updateInfo)
-
-  logToWin(updateInfo)
 })
 ipcMain.on('app_version', (event) => {
   event.sender.send('app_version', { version: app.getVersion() });

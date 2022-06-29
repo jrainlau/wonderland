@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "main": "main.js",
   "scripts": {
+    "upgradeVersion": "node ./scripts/upgradeVersion.js",
     "start": "electron .",
-    "build:mac": "node ./scripts/setVersion.js && electron-builder build --mac",
-    "build:mac:base": "VERSION=1.0.0 node ./scripts/setVersion.js && electron-builder build --mac && mv ./dist ./1.0.0",
-    "build:win": "electron-builder build --win",
+    "build:mac": "yarn upgradeVersion && electron-builder -c ./build.config.js build --mac",
+    "build:win": "yarn upgradeVersion && electron-builder build --win",
     "serve": "npx http-server ./dist --port=8081"
   },
   "repository": "https://github.com/jrainlau/wonderland.git",
@@ -14,7 +14,8 @@
   "license": "MIT",
   "devDependencies": {
     "electron": "^19.0.6",
-    "electron-builder": "^23.1.0"
+    "electron-builder": "^23.1.0",
+    "fs-extra": "^10.1.0"
   },
   "dependencies": {
     "electron-log": "^4.4.8",

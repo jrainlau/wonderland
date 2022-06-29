@@ -28,6 +28,7 @@
 <body>
   <h1>Electron Auto Update Example</h1>
   <p id="version"></p>
+  <input type="text" id="version-input" placeholder="Input version">
   <button onClick="checkUpdate()">Check update</button>
   <div id="notification" class="hidden">
     <p id="message"></p>
@@ -75,7 +76,9 @@
       ipcRenderer.send('restart_app');
     }
     function checkUpdate() {
-      ipcRenderer.send('check_update')
+      const version = document.querySelector('#version-input').value
+      console.log(`Querying version:`, version)
+      ipcRenderer.send('check_update', version)
     }
   </script>
 </body>
