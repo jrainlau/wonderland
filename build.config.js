@@ -12,7 +12,4 @@ module.exports = {
   directories: {
     output: `./dist/${version}`
   },
-  mac: {
-    target: ['dmg', 'zip']
-  }
 }
