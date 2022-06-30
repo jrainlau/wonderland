@@ -12,4 +12,11 @@ module.exports = {
   directories: {
     output: `./dist/${version}`
   },
+  win: {
+    artifactName: "${productName}-${version}.${ext}"
+  },
+  nsis: {
+    oneClick: false,
+    allowToChangeInstallationDirectory: true,
+  }
 }
