@@ -6,7 +6,7 @@
     "upgradeVersion": "node ./scripts/upgradeVersion.js",
     "start": "electron .",
     "build:mac": "yarn upgradeVersion && electron-builder -c ./build.config.js build --mac",
-    "build:win": "yarn upgradeVersion && electron-builder build --win",
+    "build:win": "yarn upgradeVersion && electron-builder -c ./build.config.js build --win",
     "serve": "npx http-server ./dist --port=8081"
   },
   "repository": "https://github.com/jrainlau/wonderland.git",
