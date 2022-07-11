@@ -11,6 +11,7 @@ autoUpdater.logger = log;
 autoUpdater.logger.transports.file.level = 'info';
 autoUpdater.allowDowngrade = true
 autoUpdater.allowPrerelease = true
+// autoUpdater.channel = 'xxx'
 
 let mainWindow;
 

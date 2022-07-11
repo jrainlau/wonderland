@@ -4,6 +4,7 @@ const fs = require('fs-extra')
 fs.ensureDirSync('./dist')
 
 module.exports = {
+  detectUpdateChannel: false,
   publish: [{
     provider: 'generic',
     url: ''
